@@ -1,4 +1,4 @@
-import React, { use, useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import { BookContext } from '../../Context/BookProvider';
 
@@ -7,7 +7,7 @@ const booksPromise = fetch('/booksData.json')
 
 const BookDetails = () => {
 
-    const { booksId: bookParamsId } = useParams();
+    const { bookId: bookParamsId } = useParams();
     
 
     // const books = use(booksPromise);
@@ -15,7 +15,7 @@ const BookDetails = () => {
     const books = useLoaderData();
   
 
-    const expectedBook = books.find((book) => book.booksId == bookParamsId);
+    const expectedBook = books.find((book) => book.bookId === Number(bookParamsId));
 
     const {bookId, bookName, author, image, review, totalPages, rating, category, tags, publisher, yearOfPublishing} = expectedBook;
 

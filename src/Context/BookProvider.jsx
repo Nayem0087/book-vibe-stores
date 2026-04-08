@@ -14,6 +14,14 @@ const BookProvider = ({ children }) => {
         // 3. array or collection
         // 4. if the book is already exist then show a alert or toast
         // 5. if not then add the book in the array or collection
+
+        const isExistInWishList = wishList.find((book) => book.bookId === currentBook.bookId);
+
+        if(isExistInWishList) {
+            toast.error(`${currentBook.bookName} is is already in Wish list`);
+            return;
+        }
+
         const isExistBook = storedBooks.find((book) => book.bookId === currentBook.bookId);
         if (isExistBook) {
             toast.error(`${currentBook.bookName} is is already exist to list`)
@@ -21,7 +29,6 @@ const BookProvider = ({ children }) => {
             setStoredBooks([...storedBooks, currentBook]);
             toast.success(`${currentBook.bookName} is added to read list`)
         }
-        console.log(currentBook, storedBooks, 'book');
     }
 
     const handleWishList = (currentBook) => {
@@ -37,18 +44,17 @@ const BookProvider = ({ children }) => {
             toast.error(`${currentBook.bookName} is is already in read list`);
             return;
         }
-        console.log('found:', isExistInReadList);
+        
 
          const isExistBook = wishList.find((book) => book.bookId === currentBook.bookId);
 
        
         if (isExistBook) {
-            toast.error(`${currentBook.bookName} is is already exist to list`)
+            toast.error(`${currentBook.bookName} is is already exist to read list`)
         } else {
             setWishlist([...wishList, currentBook]);
             toast.success(`${currentBook.bookName} is added to list`)
         }
-        console.log(currentBook, storedBooks, wishList, 'book');
     }
 
     const data = {
